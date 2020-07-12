@@ -4,81 +4,91 @@ os.system("clear")
 
 directory = os.path.dirname(os.path.realpath(__file__))
 
+def chooseIndent(num):
+    indentNum = int(os.get_terminal_size()[0]-num)//2
+    indent = str(" "*indentNum)
+    return indent
+
+indent = chooseIndent(16)
+
 noose = '''----------------
-        |              |'''
+'''+indent+'''|              |'''
+
 
 letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","v","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
 hangman = [
-    '''        |
-        |
-        |
-        |
+    indent+'''|
+'''+indent+'''|
+'''+indent+'''|
+'''+indent+'''|
     ''',
 
-    '''        |              O
-        |
-        |
-        |
+    indent+'''|              O
+'''+indent+'''|
+'''+indent+'''|
+'''+indent+'''|
     ''',
 
-    '''        |              O
-        |              |
-        |
-        |
+    indent+'''|              O
+'''+indent+'''|              |
+'''+indent+'''|
+'''+indent+'''|
     ''',
 
-    '''        |              O
-        |             \|
-        |
-        |
+    indent+'''|              O
+'''+indent+'''|             \|
+'''+indent+'''|
+'''+indent+'''|
     ''',
 
-    '''        |              O
-        |             \|/
-        |
-        |
+    indent+'''|              O
+'''+indent+'''|             \|/
+'''+indent+'''|
+'''+indent+'''|
     ''',
 
-    '''        |              O
-        |             \|/
-        |              |
-        |
+    indent+'''|              O
+'''+indent+'''|             \|/
+'''+indent+'''|              |
+'''+indent+'''|
     ''',
 
-    '''        |              O
-        |             \|/
-        |              |
-        |             /
+    indent+'''|              O
+'''+indent+'''|             \|/
+'''+indent+'''|              |
+'''+indent+'''|             /
     ''',
-    '''        |              O
-        |             \|/
-        |              |
-        |             / \\
+    indent+'''|              O
+'''+indent+'''|             \|/
+'''+indent+'''|              |
+'''+indent+'''|             / \\
     '''
 ]
 
-print("\n\t _   _                                       ")
-print("\t| | | | __ _ _ __   __ _ _ __ ___   __ _ _ __  ")
-print("\t| |_| |/ _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ ")
-print("\t|  _  | (_| | | | | (_| | | | | | | (_| | | | |")
-print("\t|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|")
-print("\t                   |___/                       ")
+indent = chooseIndent(47)
 
-print("\n\tWould you like to play?")
+print("\n"+indent+" _   _                                       ")
+print(indent+"| | | | __ _ _ __   __ _ _ __ ___   __ _ _ __  ")
+print(indent+"| |_| |/ _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ ")
+print(indent+"|  _  | (_| | | | | (_| | | | | | | (_| | | | |")
+print(indent+"|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|")
+print(indent+"                   |___/                       ")
+
+print("\n"+indent+"Would you like to play?")
 
 while True:
 
     while True:
 
-        inp = input("\n\t> ").strip().lower()
+        inp = input("\n"+indent+"> ").strip().lower()
         if inp == "yes" or inp == "y":
             break
         elif inp == "no" or inp == "n":
             print()
             quit()
         else:
-            print("\n\tUnknown command")
+            print("\n"+indent+"Unknown command")
 
     words, guessedLetters = [], []
     with open(os.path.join(directory,"words.txt")) as f:
@@ -96,6 +106,8 @@ while True:
     print()
     print()
 
+    indent = chooseIndent(16)
+
     while True:
         showWord = ""
 
@@ -105,7 +117,7 @@ while True:
             else:
                 showWord = showWord + "_ "
 
-        print("\n\t"+noose+"\n"+hangman[turns])
+        print("\n"+indent+""+noose+"\n"+hangman[turns])
         for i in range(0, 6):
             row = []
             for j in range(0, 6):
@@ -115,38 +127,38 @@ while True:
                         else:                                        row.append("\033[91m"+"".join(letters[((i*6)+j)].upper())+"\033[0m")
                     else:
                         row.append("-")
-            print("\t"+"  ".join(row))
-        print("\n\t"+showWord)
+            print(indent+""+"  ".join(row))
+        print("\n"+indent+""+showWord)
 
         if showWord.lower().replace(" ","") == word:
-            print("\n\t===============")
-            print("\n\tYou won!")
-            print("\tThe word was '"+word+"'")
-            print("\tYou got",turns,"letters wrong")
+            print("\n"+indent+"===============")
+            print("\n"+indent+"You won!")
+            print(indent+"The word was '"+word+"'")
+            print(indent+"You got",turns,"letters wrong")
             break
 
         if turns == 7:
-            print("\n\t===============")
-            print("\n\tGame Over")
-            print("\tThe word was '"+word+"'")
+            print("\n"+indent+"===============")
+            print("\n"+indent+"Game Over")
+            print(indent+"The word was '"+word+"'")
             break
 
-        inp = input("\n\n\t> ").lower().strip()
+        inp = input("\n\n"+indent+"> ").lower().strip()
         if inp not in guessedLetters:
             if inp in letters:
                 if inp in word:
                     os.system("clear")
-                    print("\033[32m"+"\n\tCorrect"+"\033[0m")
+                    print("\033[32m"+"\n"+indent+"Correct"+"\033[0m")
                 else:
                     turns += 1
                     os.system("clear")
-                    print("\033[91m"+"\n\tIncorrect"+"\033[0m")
+                    print("\033[91m"+"\n"+indent+"Incorrect"+"\033[0m")
                     # guessedLetters.append("\033[91m"+inp+"\033[0m") #Red text
                 guessedLetters.append(inp)
             else:
                 os.system("clear")
-                print("\n\tPlease type one letter")
+                print("\n"+indent+"Please type one letter")
         else:
             os.system("clear")
-            print("\n\tYou've already guessed that letter")
-    print("\n\tWould you like to play again?")
+            print("\n"+indent+"You've already guessed that letter")
+    print("\n"+indent+"Would you like to play again?")
