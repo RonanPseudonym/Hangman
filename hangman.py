@@ -69,6 +69,8 @@ hangman = [
 
 while True:
 
+    os.system(clear)
+
     indent = chooseIndent(47)
 
     print("\n"+indent+" _   _                                       ")
@@ -146,12 +148,14 @@ while True:
             print("\n"+indent+"🎉 You won")
             print(indent+"The word was '"+word+"'")
             print(indent+"You got",turns,"letters wrong")
+            input(indent+"Press [enter] to proceed")
             break
 
         if turns == 7:
             print("\n"+indent+"===============")
             print("\n"+indent+"💀 Game Over ")
             print(indent+"The word was '"+word+"'")
+            input(indent+"Press [enter] to proceed")
             break
 
         inp = input("\n\n"+indent+"> ").lower().strip()
@@ -172,4 +176,3 @@ while True:
         else:
             os.system("clear")
             print("\n"+indent+"\033[93mAlready guessed\033[0m")
-    
