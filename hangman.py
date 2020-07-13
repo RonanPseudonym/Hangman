@@ -66,27 +66,38 @@ hangman = [
     '''
 ]
 
-indent = chooseIndent(47)
-
-print("\n"+indent+" _   _                                       ")
-print(indent+"| | | | __ _ _ __   __ _ _ __ ___   __ _ _ __  ")
-print(indent+"| |_| |/ _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ ")
-print(indent+"|  _  | (_| | | | | (_| | | | | | | (_| | | | |")
-print(indent+"|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|")
-print(indent+"                   |___/                       ")
-
-print("\n"+indent+"Would you like to play?")
 
 while True:
+
+    indent = chooseIndent(47)
+
+    print("\n"+indent+" _   _                                       ")
+    print(indent+"| | | | __ _ _ __   __ _ _ __ ___   __ _ _ __  ")
+    print(indent+"| |_| |/ _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ ")
+    print(indent+"|  _  | (_| | | | | (_| | | | | | | (_| | | | |")
+    print(indent+"|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|")
+    print(indent+"                   |___/                       ")
+
+    print("\n"+str("Type 'play' to play, 'help' for help, 'quit'".center(os.get_terminal_size()[0])))
+    print(str("to quit and 'credits' to display credits".center(os.get_terminal_size()[0])))
 
     while True:
 
         inp = input("\n"+indent+"> ").strip().lower()
-        if inp == "yes" or inp == "y":
+        if inp == "play" or inp == "p":
             break
-        elif inp == "no" or inp == "n":
+        elif inp == "quit" or inp == "q":
             print()
             quit()
+        elif inp == "help" or inp == "h":
+            print("\n"+indent+"Welcome to Hangman!")
+            print(indent+"You play by guessing letters to find the word.")
+            print(indent+"If you guess the word, you win.")
+            print(indent+"If you guess incorrectly too many times, you lose.")
+            print(indent+"That's all! Have fun 😉")
+        elif inp == "credits" or inp == "c":
+            print("\n"+indent+"Hangman is created by Ronan Underwood.")
+            print(indent+"© CrypotoBabylon Games 2020")
         else:
             print("\n"+indent+"Unknown command")
 
@@ -132,14 +143,14 @@ while True:
 
         if showWord.lower().replace(" ","") == word:
             print("\n"+indent+"===============")
-            print("\n"+indent+"You won!")
+            print("\n"+indent+"🎉 You won")
             print(indent+"The word was '"+word+"'")
             print(indent+"You got",turns,"letters wrong")
             break
 
         if turns == 7:
             print("\n"+indent+"===============")
-            print("\n"+indent+"Game Over")
+            print("\n"+indent+"💀 Game Over ")
             print(indent+"The word was '"+word+"'")
             break
 
@@ -157,8 +168,8 @@ while True:
                 guessedLetters.append(inp)
             else:
                 os.system("clear")
-                print("\n"+indent+"Please type one letter")
+                print("\n"+indent+"\033[93mInvalid input\033[0m")
         else:
             os.system("clear")
-            print("\n"+indent+"You've already guessed that letter")
-    print("\n"+indent+"Would you like to play again?")
+            print("\n"+indent+"\033[93mAlready guessed\033[0m")
+    
