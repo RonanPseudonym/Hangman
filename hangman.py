@@ -69,7 +69,7 @@ hangman = [
 
 while True:
 
-    os.system(clear)
+    os.system("clear")
 
     indent = chooseIndent(47)
 
@@ -108,11 +108,37 @@ while True:
         for line in f:
             words.append(line.strip().lower())
 
-    os.system("clear")
 
-    word = str(random.choice(words))
+    print("\n"+indent+"Choose difficulty (easy, medium, hard, extreme)")
+    while True:
+        inp = input("\n"+indent+"> ").strip().lower()
+        if inp == "easy":
+            while True:
+                word = str(random.choice(words))
+                if len(word) == 4 or len(word) == 5:
+                    break
+        elif inp == "medium":
+            while True:
+                word = str(random.choice(words))
+                if len(word) == 6 or len(word) == 7 or len(word) == 8:
+                    break
+        elif inp == "hard":
+            while True:
+                word = str(random.choice(words))
+                if len(word) == 9 or len(word) == 10 or len(word) == 11:
+                    break
+        elif inp == "extreme":
+            while True:
+                word = str(random.choice(words))
+                if len(word) == 12 or len(word) == 13:
+                    break
+        else:
+            print("\n"+indent+"Unknown command")
+        break
 
     turns = 0
+
+    os.system("clear")
 
     # =====================================================
 
