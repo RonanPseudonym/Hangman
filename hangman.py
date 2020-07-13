@@ -109,28 +109,23 @@ while True:
             words.append(line.strip().lower())
 
 
-    print("\n"+indent+"Choose difficulty (easy, medium, hard, extreme)")
+    print("\n"+indent+"Choose difficulty (easy, medium, hard)")
     while True:
         inp = input("\n"+indent+"> ").strip().lower()
         if inp == "easy":
             while True:
                 word = str(random.choice(words))
-                if len(word) == 4 or len(word) == 5:
+                if len(word) == 6 or len(word) == 7:
                     break
         elif inp == "medium":
             while True:
                 word = str(random.choice(words))
-                if len(word) == 6 or len(word) == 7 or len(word) == 8:
+                if len(word) == 8 or len(word) == 9 or len(word) == 10:
                     break
         elif inp == "hard":
             while True:
                 word = str(random.choice(words))
-                if len(word) == 9 or len(word) == 10 or len(word) == 11:
-                    break
-        elif inp == "extreme":
-            while True:
-                word = str(random.choice(words))
-                if len(word) == 12 or len(word) == 13:
+                if len(word) == 11 or len(word) == 12 or len(word) == 13:
                     break
         else:
             print("\n"+indent+"Unknown command")
@@ -167,7 +162,7 @@ while True:
                     else:
                         row.append("-")
             print(indent+""+"  ".join(row))
-        print("\n"+indent+""+showWord)
+        print("\n"+showWord.center(os.get_terminal_size()[0]))
 
         if showWord.lower().replace(" ","") == word:
             print("\n"+indent+"===============")
@@ -202,3 +197,4 @@ while True:
         else:
             os.system("clear")
             print("\n"+indent+"\033[93mAlready guessed\033[0m")
+    
