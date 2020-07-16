@@ -1,4 +1,4 @@
-import os, random
+import os, random, getch
 
 os.system("clear")
 
@@ -179,7 +179,9 @@ while True:
             input(indent+"Press [enter] to proceed")
             break
 
-        inp = input("\n\n"+indent+"> ").lower().strip()
+        print("\n\n")
+        inp = getch.getch()
+        inp = inp.lower().strip()
         if inp not in guessedLetters:
             if inp in letters:
                 if inp in word:
@@ -197,4 +199,3 @@ while True:
         else:
             os.system("clear")
             print("\n"+indent+"\033[93mAlready guessed\033[0m")
-    
